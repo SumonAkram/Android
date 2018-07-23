@@ -1,0 +1,171 @@
+#Person Class:
+
+package com.mk.bitm.myappp;
+
+/**
+ * Created by Mobile App Develop on 7/18/2018.
+ */
+
+public class Person {
+    private String fName,mName,lName;
+
+    public Person(String fName, String mName, String lName) {
+        this.fName = fName;
+        this.mName = mName;
+        this.lName = lName;
+    }
+
+    public String getmName() {
+        return mName;
+    }
+
+    public void setmName(String mName) {
+        this.mName = mName;
+    }
+
+    public String getlName() {
+        return lName;
+    }
+
+    public void setlName(String lName) {
+        this.lName = lName;
+    }
+
+    public String getfName() {
+        return fName;
+    }
+
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
+
+
+    public String getPersonInfo() {
+        return  fName + " " +mName + " "+lName;
+    }
+
+}
+
+
+#ActivityMain
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mk.bitm.myappp.MainActivity">
+
+
+    <EditText
+        android:id="@+id/editTextFName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="@string/please_enter_first_name"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        />
+
+    <EditText
+        android:id="@+id/editTextMName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/please_enter_middle_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editTextFName"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        />
+
+    <EditText
+        android:id="@+id/editTextLName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editTextMName"
+        android:layout_marginTop="34dp"
+        android:hint="@string/please_enter_last_name"
+        android:ems="10"
+        android:inputType="textPersonName"
+        />
+
+    <TextView
+        android:id="@+id/tvShowData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnShowData"
+        android:layout_marginTop="33dp" />
+
+    <Button
+        android:id="@+id/btnShowData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextLName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp"
+        android:text="@string/show_data" />
+
+</RelativeLayout>
+
+
+
+#MainActivity
+
+package com.mk.bitm.myappp;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
+public class MainActivity extends AppCompatActivity {
+EditText firstNameET,middleNameET,lastNameET;
+TextView tvShowData;
+Button btnShowData;
+    Person p;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        // initialize the view control
+        firstNameET=findViewById(R.id.editTextFName);
+        middleNameET=findViewById(R.id.editTextMName);
+        lastNameET=findViewById(R.id.editTextLName);
+        tvShowData=findViewById(R.id.tvShowData);
+
+        btnShowData=findViewById(R.id.btnShowData);
+
+       btnShowData.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+
+               // store the view
+               String  firtName=firstNameET.getText().toString();
+               String  middleName=middleNameET.getText().toString();
+               String  lastName=lastNameET.getText().toString();
+               // show the data by creating object and pass the value
+               p=new Person(firtName, middleName,lastName);
+               //Toast.makeText(MainActivity.this,p.getPersonInfo(),Toast.LENGTH_LONG).show();
+
+               tvShowData.setText(p.getPersonInfo());
+           }
+       });
+    }
+}
+
