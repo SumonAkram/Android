@@ -1,0 +1,97 @@
+##Main Activity
+
+public class CheckBoxActivity extends AppCompatActivity {
+
+    LinearLayout linearLayId;
+    CheckBox CheckBox1, CheckBox2, CheckBox3;
+    TextView textResult;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_check_box);
+
+        linearLayId = findViewById(R.id.checkboxContainer);
+
+        CheckBox1 = findViewById(R.id.check1);
+        CheckBox2 = findViewById(R.id.check2);
+        CheckBox3 = findViewById(R.id.check3);
+
+        textResult = findViewById(R.id.viewId);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //For Stop Hardware Back Button
+
+        Toast.makeText(this, "Back Button is Disabled", Toast.LENGTH_SHORT).show();
+    }
+
+    public void gotoSubmitClick(View view) {
+        ArrayList<String> choiceCollect = new ArrayList<>();
+
+        for (int i = 0; i < linearLayId.getChildCount(); i++) {
+            View unknownView = linearLayId.getChildAt(i);
+
+            if (unknownView instanceof CheckBox) {
+                CheckBox checkBox = (CheckBox) unknownView;
+
+                if (checkBox.isChecked()) {
+                    choiceCollect.add(checkBox.getText().toString());
+                }
+                else{
+                    textResult.setText("Select One Plz.");
+                }
+            }
+        }
+
+        textResult.setText(choiceCollect.toString().toString());
+//        Toast.makeText(CheckBoxActivity.this, "" + choiceCollect.toString(), Toast.LENGTH_SHORT).show();
+    }
+}
+
+
+
+##Activity Main
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/checkboxContainer"
+    tools:context=".CheckBoxActivity">
+
+    <CheckBox
+        android:id="@+id/check1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/md_abdur_rahim" />
+
+    <CheckBox
+        android:id="@+id/check2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mst_mehabuba_aktar" />
+
+    <CheckBox
+        android:id="@+id/check3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mst_raiyana_rahim" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="gotoSubmitClick"
+        android:text="@string/submit"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/viewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center" />
+
+</LinearLayout>
