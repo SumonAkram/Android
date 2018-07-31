@@ -1,0 +1,85 @@
+
+##MainActivity
+
+package com.bitm.basis.a30july;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    RadioGroup radioRG;
+    TextView textView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        radioRG=findViewById(R.id.radioRG);
+        textView=findViewById(R.id.tv_result);
+
+    }
+
+    public void getData(View view) {
+       int getSelectedId=radioRG.getCheckedRadioButtonId();
+        RadioButton radioButton=findViewById(getSelectedId);
+        if(radioButton!=null){
+            textView.setText(radioButton.getText().toString());
+        }
+        else {
+            Toast.makeText(this,"Please Select One",Toast.LENGTH_LONG).show();
+        }
+    }
+}
+
+
+##ActivityMain
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <RadioGroup
+        android:id="@+id/radioRG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mobile" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Laptop" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tablet" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/submit"
+        android:text="Submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="getData"
+        />
+    <TextView
+        android:id="@+id/tv_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You selected..."/>
+</LinearLayout>
