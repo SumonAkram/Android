@@ -1,0 +1,106 @@
+Main Activity .............
+
+String[] countryNames;
+Spinner spinner;
+TextView textView;
+Button button;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_spinner);
+
+    countryNames = getResources().getStringArray(R.array.country_names);
+
+    spinner = findViewById(R.id.spinnerId);
+    textView = findViewById(R.id.texViewId);
+    button = findViewById(R.id.buttonId);
+
+    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.spinner_sample,R.id.textViewSampleId,countryNames);
+    spinner.setAdapter(adapter);
+
+    button.setOnClickListener(new View.OnClickListener(){
+
+        @Override
+        public void onClick(View view) {
+            String value = spinner.getSelectedItem().toString();
+            textView.setText(value);
+        }
+    });
+}
+
+
+
+Strings ...............
+
+<string-array name="country_names">
+    <item>Afghanistan</item>
+    <item>Bangladesh</item>
+    <item>Bhutan</item>
+    <item>India</item>
+    <item>Maldive</item>
+    <item>Nepal</item>
+    <item>Pakistan</item>
+    <item>Sri Lanka</item>
+</string-array>
+
+
+Layout ..............
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#78F4CA"
+    android:padding="10dp"
+    android:gravity="center|top"
+    tools:context=".SpinnerActivity">
+
+    <Spinner
+        android:id="@+id/spinnerId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        ></Spinner>
+
+    <Button
+        android:id="@+id/buttonId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="@string/submit"
+        android:textAllCaps="false"
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:id="@+id/texViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        />
+</LinearLayout>
+
+
+Additional Sample Layout (spinner_sample.xml) ............
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewSampleId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+
+        />
+
+</LinearLayout>
